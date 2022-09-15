@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:~/Desktop/project-oj/kafkaProducer/h2db2
+    url: jdbc:h2:~/Desktop/project-oj/kafkaConsumerDB
   h2:
     console:
       enabled: true
