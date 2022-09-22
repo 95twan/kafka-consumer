@@ -40,9 +40,9 @@ public class JudgeService {
 
     public void unzipAssignment(String fileUrl) {
         ProcessBuilder builder = new ProcessBuilder();
-        builder.directory(new File("/Users/twan/Desktop/project-oj/download"));
+        builder.directory(new File("/Users/twan/Desktop/project-oj"));
         // 실행 권한 필요
-        builder.command("./test.sh", fileUrl);
+        builder.command("./kafkaConsumer/test.sh", fileUrl);
 
         try {
             Process process = builder.start();

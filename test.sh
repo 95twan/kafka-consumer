@@ -1,6 +1,8 @@
 #!/bin/zsh
 
-unzip "$1"
+cd ./download || exit
+
+unzip -q -o "$1"
 
 cd ./dummy || exit
 
