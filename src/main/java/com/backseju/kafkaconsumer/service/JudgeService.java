@@ -1,7 +1,6 @@
 package com.backseju.kafkaconsumer.service;
 
 import com.backseju.kafkaconsumer.entity.Assignment;
-import com.backseju.kafkaconsumer.repository.AssignmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,13 +20,10 @@ import java.nio.file.Paths;
 @RequiredArgsConstructor
 public class JudgeService {
 
-    private final AssignmentRepository assignmentRepository;
-
-    public String downloadAssignment(Long assignmentId) {
-        Assignment assignment = assignmentRepository.findById(assignmentId).orElseThrow(EntityNotFoundException::new);
+    public String downloadAssignment(String uploadUrl) {
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:8082/assignments/file";
-        URI uri = UriComponentsBuilder.fromHttpUrl(url).queryParam("assignmentUrl", assignment.getUploadUrl()).build().toUri();
+        URI uri = UriComponentsBuilder.fromHttpUrl(url).queryParam("assignmentUrl", uploadUrl).build().toUri();
         byte[] downloadFile = restTemplate.getForObject(uri, byte[].class);
         try{
             Path path = Files.write(Paths.get("/Users/twan/Desktop/project-oj/download/dummy.zip"), downloadFile);
